@@ -8,31 +8,26 @@ import AuthPage from "./pages/auth/AuthPage";
 import LandingPage from "./pages/auth/LandingPage";
 
 export default function App() {
-  const [role, setRole] = useState(""); // "admin", "staff", "user"
+  const [role, setRole] = useState("admin"); // "admin", "staff", "user"
   const [user, setUser] = useState("");
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/auth" element={<AuthPage />} />
-        <Route path="/" element={<LandingPage />} />
-        <Route
-          path="/"
-          element={
-            isAuthenticated ? (
-              role === "admin" ? (
-                <AdminPage user={user} />
-              ) : role === "staff" ? (
-                <StaffPage user={user} />
-              ) : (
-                <UserPage user={user} />
-              )
-            ) : (
-              <Navigate to="/auth" />
-            )
-          }
-        />
+        {isAuthenticated ? (
+          <>
+            <Route path="/" element={<Navigate to={`/${role}`} />} />
+            <Route path="/admin" element={<AdminPage />} />
+            <Route path="/staff" element={<StaffPage />} />
+            <Route path="/user" element={<UserPage />} />
+          </>
+        ) : (
+          <>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/auth" element={<AuthPage />} />
+          </>
+        )}
       </Routes>
     </BrowserRouter>
   );
