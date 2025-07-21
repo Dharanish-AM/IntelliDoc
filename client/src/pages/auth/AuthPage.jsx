@@ -28,7 +28,7 @@ export default function AuthPage() {
         <form onSubmit={handleSubmit} className="space-y-4">
           {isSignUp && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 flex items-center gap-2">
+              <label className="block text-sm font-medium text-gray-700 items-center gap-2">
                 Role
               </label>
               <select

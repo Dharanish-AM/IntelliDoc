@@ -10,7 +10,12 @@ import LandingPage from "./pages/auth/LandingPage";
 
 export default function App() {
   const [role, setRole] = useState("admin"); // "admin", "staff", "user"
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState({
+    id: 1,
+    name: "John Doe",
+    email: "john.doe@example.com",
+    role: "admin",
+  });
   const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   return (
