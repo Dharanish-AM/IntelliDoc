@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Home,
   FileText,
@@ -12,8 +13,9 @@ import {
   User,
 } from "lucide-react";
 import logo from "../assets/intellidoc.png";
-
+  
 export function Sidebar({ user, currentView, onViewChange, isCollapsed }) {
+  const navigate = useNavigate();
   const getMenuItems = () => {
     switch (user?.role) {
       case "admin":
@@ -82,7 +84,7 @@ export function Sidebar({ user, currentView, onViewChange, isCollapsed }) {
             return (
               <button
                 key={item.id}
-                onClick={() => onViewChange(item.id)}
+                onClick={() => navigate(`/${user?.role}/${item.id}`)}
                 className={`w-full cursor-pointer flex items-center space-x-3 px-3 py-3 rounded-lg text-left transition-all duration-200 ${
                   isActive
                     ? "bg-blue-50 text-blue-600 border-r-2 border-blue-600"
