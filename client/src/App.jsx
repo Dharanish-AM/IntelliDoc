@@ -15,6 +15,7 @@ import UserManagement from "./pages/main/admin/UserManagement";
 import AllDocuments from "./pages/main/admin/AllDocuments";
 import StaffDocs from "./pages/main/staff/StaffDocs";
 import Upload from "./pages/main/staff/Upload";
+import { mockUsers } from "./data/mockData";
 
 export default function App() {
   const [role, setRole] = useState("admin"); // "admin", "staff", "user"
@@ -35,7 +36,18 @@ export default function App() {
     setIsAuthenticated(false);
   };
 
-  const handleLogin = (form) => {};
+
+
+  const handleLogin = (form) => {
+    const matchedUser = mockUsers.find((u) => u.email === form.email);
+    if (matchedUser) {
+      setUser(matchedUser);
+      setRole(matchedUser.role);
+      setIsAuthenticated(true);
+    } else {
+      alert("Invalid email. Please try again.");
+    }
+  };
 
   return (
     <BrowserRouter>
