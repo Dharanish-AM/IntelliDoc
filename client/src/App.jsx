@@ -13,18 +13,30 @@ import { Header } from "./components/Header";
 import Analytics from "./pages/main/admin/Analytics";
 import UserManagement from "./pages/main/admin/UserManagement";
 import AllDocuments from "./pages/main/admin/AllDocuments";
-import Profile from "./components/Profile";
+import StaffDocs from "./pages/main/staff/StaffDocs";
+import Upload from "./pages/main/staff/Upload";
 
 export default function App() {
   const [role, setRole] = useState("admin"); // "admin", "staff", "user"
   const [user, setUser] = useState({
-    id: 1,
-    name: "John Doe",
-    email: "john.doe@example.com",
+    id: "1",
+    name: "John Staff",
+    email: "john@sakthiauto.com",
     role: "admin",
+    department: "Engineering",
+    address: "45 Industrial Road, Coimbatore",
+    age: 35,
+    mobile: "9123456780",
   });
   const [isAuthenticated, setIsAuthenticated] = useState(true);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = React.useState(false);
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+  };
+
+  const handleLogin = (form) => {};
+
   return (
     <BrowserRouter>
       <Routes>
@@ -40,6 +52,7 @@ export default function App() {
                       isCollapsed={isSidebarCollapsed}
                       onToggleSidebar={setIsSidebarCollapsed}
                       user={user}
+                      handleLogout={() => handleLogout()}
                     />
                     <Routes>
                       {role === "admin" && (
@@ -74,11 +87,11 @@ export default function App() {
                           />
                           <Route
                             path="/staff/documents"
-                            element={<div>Staff Documents</div>}
+                            element={<StaffDocs user={user} />}
                           />
                           <Route
                             path="/staff/uploads"
-                            element={<div>Staff Uploads</div>}
+                            element={<Upload user={user} />}
                           />
                           <Route
                             path="*"
@@ -96,6 +109,7 @@ export default function App() {
                             path="/user/documents"
                             element={<div>User Documents</div>}
                           />
+
                           <Route
                             path="*"
                             element={<Navigate to="/user/dashboard" />}
@@ -112,7 +126,10 @@ export default function App() {
         ) : (
           <>
             <Route path="/" element={<LandingPage />} />
-            <Route path="/auth" element={<AuthPage />} />
+            <Route
+              path="/auth"
+              element={<AuthPage handleLogin={handleLogin} />}
+            />
             <Route path="*" element={<Navigate to="/" />} />
           </>
         )}

@@ -13,7 +13,7 @@ import DocumentModal from "../../../components/DocumentModal";
 
 // ...Keep TagChip and DocumentModal same
 
-const AllDocuments = () => {
+const StaffDocs = () => {
   const [selectedDoc, setSelectedDoc] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [view, setView] = useState("grid"); // 'grid' or 'list'
@@ -220,4 +220,4 @@ const AllDocuments = () => {
   );
 };
 
-export default AllDocuments;
+export default StaffDocs;

@@ -149,18 +149,10 @@ const ProfileModal = ({ onClose }) => {
     <>
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
         <div className="bg-white rounded-3xl shadow-2xl p-10 relative overflow-hidden">
-          {/* Close Button */}
-          <button
-            onClick={onClose}
-            className="absolute top-5 right-5 text-gray-500 hover:text-black transition"
-            aria-label="Close profile modal"
-          >
-            <X className="w-6 h-6" />
-          </button>
-
           {/* Header */}
-          <h2 className="text-3xl font-extrabold mb-8 text-center text-gray-900 tracking-wide">
-            Profile Details
+          <h2 className="text-3xl flex justify-between items-center font-extrabold mb-8 text-gray-900 tracking-wide">
+            <span>Profile Details</span>
+            <X className="w-6 h-6 cursor-pointer" onClick={onClose} />
           </h2>
 
           {/* User Avatar */}
@@ -174,65 +166,62 @@ const ProfileModal = ({ onClose }) => {
           </div>
 
           {/* Info Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-gray-800">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {profileFields.map(({ icon: Icon, label, key, type }) => (
               <div
-                key={label}
-                className="flex items-center gap-4 border-b border-gray-300 pb-3 last:border-none"
+                key={key}
+                className="rounded-lg border border-gray-200 bg-gray-50 p-4 hover:shadow-sm transition"
               >
-                <div className="p-2 rounded-md bg-gray-200">
-                  <Icon className="w-5 h-5 text-gray-600" />
-                </div>
-                <div className="flex-1">
-                  <p className="text-xs font-semibold uppercase text-gray-500">
+                <div className="flex items-center gap-3 mb-2 text-gray-600">
+                  <Icon className="w-4 h-4" />
+                  <span className="text-xs font-semibold uppercase tracking-wider">
                     {label}
-                  </p>
-                  {isEditing ? (
-                    <input
-                      type={type}
-                      value={user[key]}
-                      onChange={(e) => handleChange(key, e.target.value)}
-                      className="mt-1 w-full border border-gray-300 rounded-md px-2 py-1 text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-600"
-                    />
-                  ) : (
-                    <p className="text-base font-medium text-gray-900">{user[key]}</p>
-                  )}
+                  </span>
                 </div>
+                {isEditing ? (
+                  <input
+                    type={type}
+                    value={user[key]}
+                    onChange={(e) => handleChange(key, e.target.value)}
+                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-800"
+                  />
+                ) : (
+                  <div className="text-sm font-medium text-gray-800">
+                    {user[key]}
+                  </div>
+                )}
               </div>
             ))}
           </div>
 
           {/* Action Buttons */}
-          <div className="flex justify-center gap-10 mt-10">
+          <div className="flex flex-wrap justify-center gap-4 mt-8">
             <button
-              type="button"
-              aria-label={isEditing ? "Save Profile" : "Edit Profile"}
               onClick={toggleEdit}
-              className="p-3 rounded-full bg-gray-200 hover:bg-gray-300 transition"
+              className="flex items-center gap-2 px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-700 text-sm shadow-sm"
             >
               {isEditing ? (
-                <Save className="w-6 h-6 text-gray-700" />
+                <Save className="w-4 h-4" />
               ) : (
-                <Edit2 className="w-6 h-6 text-gray-700" />
+                <Edit2 className="w-4 h-4" />
               )}
+              {isEditing ? "Save" : "Edit"}
             </button>
 
             <button
-              type="button"
-              aria-label="Change Password"
               onClick={openPasswordModal}
-              className="p-3 rounded-full bg-gray-200 hover:bg-gray-300 transition"
+              className="flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-800 rounded-md hover:bg-blue-200 text-sm shadow-sm"
             >
-              <Key className="w-6 h-6 text-gray-700" />
+              <Key className="w-4 h-4" />
+              Change Password
             </button>
 
             <button
-              type="button"
-              aria-label="Delete Account"
               onClick={handleDelete}
-              className="p-3 rounded-full bg-gray-200 hover:bg-gray-300 transition"
+              className="flex items-center gap-2 px-4 py-2 bg-red-100 text-red-700 rounded-md hover:bg-red-200 text-sm shadow-sm"
             >
-              <Trash2 className="w-6 h-6 text-gray-700" />
+              <Trash2 className="w-4 h-4" />
+              Delete Account
             </button>
           </div>
 

@@ -1,8 +1,11 @@
 import React from "react";
-import { Users, Mail, Badge } from "lucide-react";
+import { Users, Mail, Badge, X } from "lucide-react";
 import { mockUsers } from "../../../data/mockData";
 
 const ManageUsers = () => {
+  const [selectedUser, setSelectedUser] = React.useState(null);
+  const [showAddModal, setShowAddModal] = React.useState(false);
+
   const getRoleColor = (role) => {
     switch (role) {
       case "admin":
@@ -36,6 +39,15 @@ const ManageUsers = () => {
         <p className="text-gray-600 mt-1">
           View and manage user accounts across the organization
         </p>
+      </div>
+
+      <div className="flex justify-end">
+        <button
+          onClick={() => setShowAddModal(true)}
+          className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition"
+        >
+          Add User
+        </button>
       </div>
 
       {/* Users Stats */}
@@ -109,6 +121,9 @@ const ManageUsers = () => {
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Status
                 </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Actions
+                </th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
@@ -152,12 +167,167 @@ const ManageUsers = () => {
                       Active
                     </span>
                   </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+                    <button
+                      onClick={() => setSelectedUser(user)}
+                      className="text-blue-600 cursor-pointer hover:text-blue-900"
+                    >
+                      View
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
       </div>
+
+      {selectedUser && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-2xl w-full max-w-lg overflow-hidden">
+           <div className="flex justify-between p-4 w-full items-center border-b border-gray-200">
+              <h3 className=" text-xl font-semibold">User Details</h3>
+            <X className="cursor-pointer" onClick={() => setSelectedUser(null)} />
+           </div>
+            <div className="px-6 py-4 space-y-3">
+              <div>
+                <p className="text-sm text-gray-500">Name</p>
+                <p className="text-base font-medium text-gray-900">
+                  {selectedUser.name}
+                </p>
+              </div>
+              <div>
+                <p className="text-sm text-gray-500">Email</p>
+                <p className="text-base font-medium text-gray-900">
+                  {selectedUser.email}
+                </p>
+              </div>
+              <div>
+                <p className="text-sm text-gray-500">Role</p>
+                <p className="text-base font-medium text-gray-900 capitalize">
+                  {selectedUser.role}
+                </p>
+              </div>
+              <div>
+                <p className="text-sm text-gray-500">Department</p>
+                <p className="text-base font-medium text-gray-900">
+                  {selectedUser.department}
+                </p>
+              </div>
+              <div>
+                <p className="text-sm text-gray-500">Address</p>
+                <p className="text-base font-medium text-gray-900">
+                  {selectedUser.address}
+                </p>
+              </div>
+              <div>
+                <p className="text-sm text-gray-500">Age</p>
+                <p className="text-base font-medium text-gray-900">
+                  {selectedUser.age}
+                </p>
+              </div>
+              <div>
+                <p className="text-sm text-gray-500">Mobile</p>
+                <p className="text-base font-medium text-gray-900">
+                  {selectedUser.mobile}
+                </p>
+              </div>
+            </div>
+            <div className="bg-gray-50 px-6 py-4 flex justify-end space-x-3">
+              <button
+                onClick={() => {
+                  /* Implement edit logic */
+                }}
+                className="bg-yellow-500 cursor-pointer hover:bg-yellow-600 text-white px-3 py-1 rounded-md"
+              >
+                Edit
+              </button>
+              <button
+                onClick={() => {
+                  /* Implement delete logic */
+                }}
+                className="bg-red-600 hover:bg-red-700 cursor-pointer text-white px-3 py-1 rounded-md"
+              >
+                Delete
+              </button>
+             
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showAddModal && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-xl shadow-xl w-full max-w-md space-y-4">
+            <h3 className="text-2xl font-semibold text-center text-gray-800">Add New User</h3>
+
+            <div className="grid grid-cols-1 gap-4">
+              <input
+                type="text"
+                placeholder="Full Name"
+                className="border border-gray-300 rounded px-4 py-2 text-sm"
+              />
+              <input
+                type="text"
+                placeholder="Employee ID"
+                className="border border-gray-300 rounded px-4 py-2 text-sm"
+              />
+
+              {/* Role Dropdown */}
+              <select className="border border-gray-300 rounded px-4 py-2 text-sm">
+                <option value="">Select Role</option>
+                <option value="Admin">Admin</option>
+                <option value="Staff">Staff</option>
+                <option value="Employee">Employee</option>
+              </select>
+
+              {/* Department Dropdown */}
+              <select className="border border-gray-300 rounded px-4 py-2 text-sm">
+                <option value="">Select Department</option>
+                <option value="Management">Management</option>
+                <option value="Engineering">Engineering</option>
+                <option value="Quality">Quality</option>
+                <option value="HR">HR</option>
+                <option value="Logistics">Logistics</option>
+                <option value="Finance">Finance</option>
+              </select>
+
+              <input
+                type="number"
+                placeholder="Age"
+                className="border border-gray-300 rounded px-4 py-2 text-sm"
+              />
+              <input
+                type="text"
+                placeholder="Address"
+                className="border border-gray-300 rounded px-4 py-2 text-sm"
+              />
+              <input
+                type="email"
+                placeholder="Email"
+                className="border border-gray-300 rounded px-4 py-2 text-sm"
+              />
+              <input
+                type="tel"
+                placeholder="Mobile"
+                className="border border-gray-300 rounded px-4 py-2 text-sm"
+              />
+            </div>
+
+            <div className="flex justify-end gap-3 pt-4">
+              <button
+                onClick={() => setShowAddModal(false)}
+                className="bg-gray-200 text-gray-700 px-4 py-2 rounded hover:bg-gray-300 text-sm"
+              >
+                Cancel
+              </button>
+              <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm">
+                Add User
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { Mail, Lock, UserRound, ShieldCheck } from 'lucide-react';
+import React, { useState } from "react";
+import { Mail, Lock, UserRound, ShieldCheck } from "lucide-react";
 
-export default function AuthPage() {
+export default function AuthPage({ handleLogin }) {
   const [isSignUp, setIsSignUp] = useState(false);
-  const [form, setForm] = useState({ email: '', password: '', role: 'user' });
+  const [form, setForm] = useState({ email: "", password: "", role: "user" });
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -12,9 +12,9 @@ export default function AuthPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isSignUp) {
-      console.log('Signing up:', form);
+      console.log("Signing up:", form);
     } else {
-      console.log('Signing in:', form);
+      handleLogin(form);  
     }
   };
 
@@ -23,7 +23,7 @@ export default function AuthPage() {
       <div className="max-w-md w-full bg-white rounded-xl shadow-md p-8 space-y-6">
         <h2 className="text-2xl font-bold text-center text-gray-800 flex items-center justify-center gap-2">
           <ShieldCheck className="w-6 h-6 text-blue-600" />
-          {isSignUp ? 'Sign Up' : 'Sign In'} to IntelliDoc
+          {isSignUp ? "Sign Up" : "Sign In"} to IntelliDoc
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           {isSignUp && (
@@ -44,7 +44,9 @@ export default function AuthPage() {
             </div>
           )}
           <div>
-            <label className="block text-sm font-medium text-gray-700">Email</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Email
+            </label>
             <div className="relative">
               <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
               <input
@@ -59,7 +61,9 @@ export default function AuthPage() {
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Password</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Password
+            </label>
             <div className="relative">
               <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
               <input
@@ -77,16 +81,16 @@ export default function AuthPage() {
             type="submit"
             className="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md"
           >
-            {isSignUp ? 'Create Account' : 'Login'}
+            {isSignUp ? "Create Account" : "Login"}
           </button>
         </form>
         <p className="text-sm text-center text-gray-500">
-          {isSignUp ? 'Already have an account?' : "Don't have an account?"}{' '}
+          {isSignUp ? "Already have an account?" : "Don't have an account?"}{" "}
           <button
             onClick={() => setIsSignUp(!isSignUp)}
             className="text-blue-600 hover:underline"
           >
-            {isSignUp ? 'Sign In' : 'Sign Up'}
+            {isSignUp ? "Sign In" : "Sign Up"}
           </button>
         </p>
       </div>

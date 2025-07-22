@@ -7,13 +7,12 @@ import {
 } from "lucide-react";
 import ProfileModal from "./Profile"; // update path as needed
 
-export function Header({ user, onToggleSidebar }) {
+export function Header({ user,handleLogout, onToggleSidebar }) {
   const [showDropdown, setShowDropdown] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
 
   const logout = () => {
-    localStorage.removeItem("token");
-    window.location.href = "/";
+  handleLogout()
   };
 
   return (

@@ -5,6 +5,9 @@ export const mockUsers = [
     email: "admin@sakthiauto.com",
     role: "admin",
     department: "Management",
+    address: "123 Main Street, Chennai",
+    age: 42,
+    mobile: "9876543210",
   },
   {
     id: "2",
@@ -12,6 +15,9 @@ export const mockUsers = [
     email: "john@sakthiauto.com",
     role: "staff",
     department: "Engineering",
+    address: "45 Industrial Road, Coimbatore",
+    age: 35,
+    mobile: "9123456780",
   },
   {
     id: "3",
@@ -19,6 +25,9 @@ export const mockUsers = [
     email: "jane@sakthiauto.com",
     role: "user",
     department: "Quality",
+    address: "78 Quality Avenue, Madurai",
+    age: 29,
+    mobile: "9012345678",
   },
   {
     id: "4",
@@ -26,6 +35,9 @@ export const mockUsers = [
     email: "mike@sakthiauto.com",
     role: "staff",
     department: "HR",
+    address: "12 HR Lane, Trichy",
+    age: 38,
+    mobile: "9345678123",
   },
   {
     id: "5",
@@ -33,6 +45,9 @@ export const mockUsers = [
     email: "sarah@sakthiauto.com",
     role: "user",
     department: "Logistics",
+    address: "56 Logistics Park, Salem",
+    age: 31,
+    mobile: "9988776655",
   },
 ];
 

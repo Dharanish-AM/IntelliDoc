@@ -13,8 +13,8 @@ import {
   User,
 } from "lucide-react";
 import logo from "../assets/intellidoc.png";
-  
-export function Sidebar({ user, currentView, onViewChange, isCollapsed }) {
+
+export function Sidebar({ user, currentView, isCollapsed }) {
   const navigate = useNavigate();
   const getMenuItems = () => {
     switch (user?.role) {
@@ -24,14 +24,12 @@ export function Sidebar({ user, currentView, onViewChange, isCollapsed }) {
           { id: "documents", label: "All Documents", icon: FileText },
           { id: "users", label: "User Management", icon: Users },
           { id: "analytics", label: "Analytics", icon: BarChart3 },
-          { id: "settings", label: "Settings", icon: Settings },
         ];
       case "staff":
         return [
           { id: "dashboard", label: "Dashboard", icon: Home },
           { id: "documents", label: "My Documents", icon: FileText },
-          { id: "upload", label: "Upload Files", icon: Upload },
-          { id: "settings", label: "Settings", icon: Settings },
+          { id: "uploads", label: "Upload Files", icon: Upload },
         ];
       case "user":
         return [
@@ -48,9 +46,7 @@ export function Sidebar({ user, currentView, onViewChange, isCollapsed }) {
   const menuItems = getMenuItems();
 
   return (
-    <div
-      className={`flex h-full flex-col bg-white border-r border-gray-200`}
-    >
+    <div className={`flex h-full flex-col bg-white border-r border-gray-200`}>
       <div className="flex flex-col h-full">
         <div className="p-6 border-b border-gray-200">
           <div className="flex items-center space-x-3">
