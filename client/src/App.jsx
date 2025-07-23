@@ -16,14 +16,15 @@ import AllDocuments from "./pages/main/admin/AllDocuments";
 import StaffDocs from "./pages/main/staff/StaffDocs";
 import Upload from "./pages/main/staff/Upload";
 import { mockUsers } from "./data/mockData";
+import UserDocuments from "./pages/main/user/UserDocuments";
 
 export default function App() {
-  const [role, setRole] = useState("admin"); // "admin", "staff", "user"
+  const [role, setRole] = useState("user"); // "admin", "staff", "user"
   const [user, setUser] = useState({
     id: "1",
     name: "John Staff",
     email: "john@sakthiauto.com",
-    role: "admin",
+    role: "user",
     department: "Engineering",
     address: "45 Industrial Road, Coimbatore",
     age: 35,
@@ -119,7 +120,7 @@ export default function App() {
                           />
                           <Route
                             path="/user/documents"
-                            element={<div>User Documents</div>}
+                            element={<UserDocuments user={user} />}
                           />
 
                           <Route

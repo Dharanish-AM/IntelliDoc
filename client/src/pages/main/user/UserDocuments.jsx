@@ -11,8 +11,7 @@ import {
 import { mockDocuments as documents } from "../../../data/mockData";
 import DocumentModal from "../../../components/DocumentModal";
 
-
-const AllDocuments = () => {
+const UserDocuments = ({ user }) => {
   const [selectedDoc, setSelectedDoc] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [view, setView] = useState("grid"); // 'grid' or 'list'
@@ -108,17 +107,7 @@ const AllDocuments = () => {
                 : "flex items-start gap-4 p-4 hover:bg-gray-50"
             }`}
           >
-            {/* Badge & Visibility */}
             <div className="absolute top-2 left-2 z-10">
-              <span
-                className={`text-[10px] px-2 py-0.5 rounded-full font-medium uppercase tracking-wide ${
-                  doc.status === "approved"
-                    ? "bg-green-100 text-green-700"
-                    : "bg-yellow-100 text-yellow-700"
-                }`}
-              >
-                {doc.status}
-              </span>
             </div>
             <div className="absolute top-2 right-2 z-10">
               {doc.visibility === "private" ? (
@@ -219,4 +208,4 @@ const AllDocuments = () => {
   );
 };
 
-export default AllDocuments;
+export default UserDocuments;

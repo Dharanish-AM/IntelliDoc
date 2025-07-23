@@ -35,8 +35,6 @@ export function Sidebar({ user, currentView, isCollapsed }) {
         return [
           { id: "dashboard", label: "Dashboard", icon: Home },
           { id: "documents", label: "Documents", icon: FileText },
-          { id: "search", label: "Search", icon: Search },
-          { id: "settings", label: "Settings", icon: Settings },
         ];
       default:
         return [];
